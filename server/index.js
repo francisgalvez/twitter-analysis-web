@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 
-const { mongoose } = require('./databases');
+//const { mongoose } = require('./databases');
 
 const app = express();  // Servidor
 
