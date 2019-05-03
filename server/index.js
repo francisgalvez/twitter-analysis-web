@@ -8,8 +8,8 @@ const app = express();  // Servidor
 
 /* ----- Settings ----- */
 //app.set('port', process.env.PORT || 3000);
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT ||  process.env.OPENSHIFT_INTERNAL_PORT || process.env.PORT || 8080);
-app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || 'localhost');
+app.set('port', process.env.PORT || 8080);
+app.set('ip', process.env.IP || '0.0.0.0');
 
 /* ----- Middlewares ----- */
 app.use(morgan('dev'));
