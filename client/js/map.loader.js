@@ -63,16 +63,16 @@ getDataAddMarkers = function ({label, value, map, exclamation}){
 
     var hours;
 
-    if(label == "2 horas"){
+    if(label == "2 hours"){
         hours = "2hours";
-    } else if (label == "4 horas"){
+    } else if (label == "4 hours"){
         hours = "4hours";
-    } else if (label == "6 horas"){
+    } else if (label == "6 hours"){
         hours = "6hours";
     }
 
     tweets = $.ajax({
-        url: "http://localhost:3000/api/tweets/geolocation/true/since/" + hours,
+        url: "http://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/true/since/" + hours,
         dataType: "json",
         error: function(xhr) {
             console.log(xhr.statusText);
@@ -134,7 +134,7 @@ L.control.layers(null, enginesOverlay, {collapsed: false}).addTo(map);
 
 L.control.timelineSlider({
     position: "bottomleft",
-    timelineItems: ["6 horas", "4 horas", "2 horas"],
+    timelineItems: ["6 hours", "4 hours", "2 hours"],
     changeMap: getDataAddMarkers })
 .addTo(map);
 
