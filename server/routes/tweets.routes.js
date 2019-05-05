@@ -253,9 +253,9 @@ router.post('/delete/db/:db', async (req, res) => {
     
     var names = await databases.findOne({name: dbName}).lean();
     var time = Date.now() - names.time*60*1000;
-    console.log(time);
+    var stringTime = time.toString()
 
-    var tweets = await Tweets[dbName].deleteMany({ timestamp : { $lte: time }});
+    var tweets = await Tweets[dbName].deleteMany({ timestamp : { $lte: stringTime }});
     res.send(tweets);
 });
 
