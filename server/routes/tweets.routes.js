@@ -7,7 +7,7 @@ const databasesSchema = require('../models/databases');
 const mongoose = require('mongoose');
 var elasticsearch = require('elasticsearch');
 
-var settings = mongoose.createConnection('mmongodb://21.0.0.3:27017/settings', { useNewUrlParser: true });
+var settings = mongoose.createConnection('mmongodb://21.0.0.11:27017/settings', { useNewUrlParser: true });
 var databases = settings.model('Databases', mongoose.Schema(databasesSchema.DatabasesSchema), 'databases');
 
 var db;
