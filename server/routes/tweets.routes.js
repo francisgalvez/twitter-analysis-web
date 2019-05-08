@@ -23,6 +23,19 @@ var dbs = databases.find().lean().exec(function (err, docs) {
     }
 });
 
+// Web sections
+router.get('/', function(req, res){
+    res.sendFile(path.join(__dirname + '../client/index.html'));
+});
+
+router.get('/about', function(req, res){
+    res.sendFile(path.join(__dirname + '../client/about.html'));
+});
+
+router.get('/api/docs', function(req, res){
+    res.sendFile(path.join(__dirname + '../client/api.html'));
+});
+
 // Get ALL tweets
 router.get('/all', async (req, res) => {
     var response = await Tweets["mainDbES"].search({

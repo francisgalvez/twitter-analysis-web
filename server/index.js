@@ -15,18 +15,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 /* ----- Routes ----- */
-app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname + '../client/index.html'));
-});
-
-app.get('/about', function(req, res){
-    res.sendFile(path.join(__dirname + '../client/about.html'));
-});
-
-app.get('/api', function(req, res){
-    res.sendFile(path.join(__dirname + '../client/api.html'));
-});
-
 app.use('/api/tweets', require('./routes/tweets.routes'));
 
 /* ----- Static files ----- */
