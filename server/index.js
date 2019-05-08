@@ -27,7 +27,6 @@ app.get('/api', function(req, res){
     res.sendFile(path.join(__dirname + '../client/api.html'));
 });
 
-
 app.use('/api/tweets', require('./routes/tweets.routes'));
 
 /* ----- Static files ----- */
