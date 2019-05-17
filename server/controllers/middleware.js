@@ -20,7 +20,8 @@ exports.ensureAuthenticated = function(req, res, next) {
           return res.status(401).send(err);
       }
     }
-    req.user = payload.sub; 
+    req.user = payload.sub;
+    req.role = payload.rol;
     next(); 
   });
 }

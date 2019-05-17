@@ -5,7 +5,8 @@ var config = require('../config');
 exports.createToken = function(user) { 
     var payload = {
         sub: user, 
-        iat: moment().unix()
+        iat: moment().unix(),
+        rol: role
     };
     return jwt.sign(payload, config.TOKEN_SECRET); 
 };

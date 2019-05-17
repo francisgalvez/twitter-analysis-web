@@ -27,7 +27,7 @@ var dbs = databases.find().lean().exec(function (err, docs) {
 
 // Get ALL tweets
 router.get('/all', middleware.ensureAuthenticated, async (req, res) => {
-    if(req.user.role != 'admin'){
+    if(req.role != 'admin'){
         return res.sendStatus(403);
     }
     
@@ -249,7 +249,7 @@ router.get('/topics/:topiclist/condition/:operator/geolocation/:option/since/:ho
 });
 
 router.get('/databases', middleware.ensureAuthenticated, async (req, res) => {
-    if(req.user.role != 'admin'){
+    if(req.role != 'admin'){
         return res.sendStatus(403);
     }
     response = await databases.find().lean();
@@ -258,7 +258,7 @@ router.get('/databases', middleware.ensureAuthenticated, async (req, res) => {
 
 // Endpoint interno para borrar tweets más antiguos de la franja horaria correspondiente
 router.post('/delete/db/:db', middleware.ensureAuthenticated, async (req, res) => {
-    if(req.user.role != 'admin'){
+    if(req.role != 'admin'){
         return res.sendStatus(403);
     }
 
