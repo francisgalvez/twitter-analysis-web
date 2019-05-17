@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 const userSchema = require('../models/user');
+var config = require('../config');
 
-var settings = mongoose.createConnection('mongodb://' + MONGO_USER + ':' + MONGO_PASSWORD + '@' + '192.168.67.13:27017/settings', { useNewUrlParser: true });
+var settings = mongoose.createConnection('mongodb://' + config.MONGO_USER + ':' + config.MONGO_PASSWORD + '@' + '192.168.67.13:27017/settings', { useNewUrlParser: true });
 var User = settings.model('User', mongoose.Schema(userSchema.userSchema), 'users');
 
 var service = require('./service'); 
