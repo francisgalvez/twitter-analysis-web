@@ -272,8 +272,4 @@ router.post('/delete/db/:db', middleware.ensureAuthenticated, async (req, res) =
     res.send(tweets);
 });
 
-router.get('/hole', middleware.ensureAuthenticated, async (req, res) => {
-    res.send("tweets");
-});
-
 module.exports = router;
