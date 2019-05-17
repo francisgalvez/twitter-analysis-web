@@ -19,7 +19,7 @@ var dbs = databases.find().lean().exec(function (err, docs) {
         if(docs[database].engine == "elasticsearch"){
             Tweets[docs[database].name] = new elasticsearch.Client({host: docs[database].URI, log: 'trace'});
         } else if (docs[database].engine == "mongo"){
-            db = mongoose.createConnection(docs[database].URI + docs[database].database_name, { useNewUrlParser: true });
+            db = mongoose.createConnection('mongodb://' + config.MONGO_USER + ':' + config.MONGO_PASSWORD + '@' + docs[database].URI + docs[database].database_name, { useNewUrlParser: true });
             Tweets[docs[database].name] = db.model('Tweet', mongoose.Schema(tweetSchema.TweetSchema), docs[database].collection);
         }
     }
