@@ -3,13 +3,13 @@ const router = express.Router();
 const geojson = require('geojson');
 const mongoose = require('mongoose');
 var elasticsearch = require('elasticsearch');
-
+var config = require('../config');
 var middleware = require('../controllers/middleware'); 
 
 const tweetSchema = require('../models/tweet');
 const databasesSchema = require('../models/databases');
 
-var settings = mongoose.createConnection('mongodb://' + MONGO_USER + ':' + MONGO_PASSWORD + '@' + '192.168.67.13:27017/settings', { useNewUrlParser: true });
+var settings = mongoose.createConnection('mongodb://' + config.MONGO_USER + ':' + config.MONGO_PASSWORD + '@' + '192.168.67.13:27017/settings', { useNewUrlParser: true });
 var databases = settings.model('Databases', mongoose.Schema(databasesSchema.DatabasesSchema), 'databases');
 
 var db;
