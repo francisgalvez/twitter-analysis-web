@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const geojson = require('geojson');
-
-const tweetSchema = require('../models/tweet');
-const databasesSchema = require('../models/databases');
 const mongoose = require('mongoose');
 var elasticsearch = require('elasticsearch');
 
-var settings = mongoose.createConnection('mmongodb://192.168.67.13:27017/settings', { useNewUrlParser: true });
+var middleware = require('../controllers/middleware'); 
+
+const tweetSchema = require('../models/tweet');
+const databasesSchema = require('../models/databases');
+
+var settings = mongoose.createConnection('mongodb://' + MONGO_USER + ':' + MONGO_PASSWORD + '@' + '192.168.67.13:27017/settings', { useNewUrlParser: true });
 var databases = settings.model('Databases', mongoose.Schema(databasesSchema.DatabasesSchema), 'databases');
 
 var db;
@@ -24,7 +26,7 @@ var dbs = databases.find().lean().exec(function (err, docs) {
 });
 
 // Get ALL tweets
-router.get('/all', async (req, res) => {
+router.get('/all', middleware.ensureAuthenticated, async (req, res) => {
     var response = await Tweets["mainDbES"].search({
                                                     index: 'twitter',
                                                     type: 'tweet',
@@ -42,7 +44,7 @@ router.get('/all', async (req, res) => {
 });
 
 // Get located or not located tweets
-router.get('/geolocation/:option', async (req, res) => {
+router.get('/geolocation/:option', middleware.ensureAuthenticated, async (req, res) => {
     var response;
 
     if(req.params.option == "true"){
@@ -79,7 +81,7 @@ router.get('/geolocation/:option', async (req, res) => {
 });
 
 // Get tweets with options
-router.get('/topics/:topiclist/condition/:operator/geolocation/:option?', async (req, res) => {
+router.get('/topics/:topiclist/condition/:operator/geolocation/:option?', middleware.ensureAuthenticated, async (req, res) => {
     var response;
 
     if(req.params.operator == "or"){
@@ -242,13 +244,16 @@ router.get('/topics/:topiclist/condition/:operator/geolocation/:option/since/:ho
     res.jsonp(geojson.parse(tweets, { Point: 'location' }));
 });
 
-router.get('/databases', async (req, res) => { 
+router.get('/databases', middleware.ensureAuthenticated, async (req, res) => {
+    if(req.user.role != 'admin'){
+        return res.sendStatus(403);
+    }
     response = await databases.find().lean();
     res.jsonp(response);
 });
 
 // Endpoint interno para borrar tweets más antiguos de la franja horaria correspondiente
-router.post('/delete/db/:db', async (req, res) => {
+router.post('/delete/db/:db', middleware.ensureAuthenticated, async (req, res) => {
     var dbName = req.params.db;
     
     var names = await databases.findOne({name: dbName}).lean();
@@ -257,6 +262,10 @@ router.post('/delete/db/:db', async (req, res) => {
 
     var tweets = await Tweets[dbName].deleteMany({ timestamp : { $lte: stringTime }});
     res.send(tweets);
+});
+
+router.get('/hole', middleware.ensureAuthenticated, async (req, res) => {
+    res.send("tweets");
 });
 
 module.exports = router;

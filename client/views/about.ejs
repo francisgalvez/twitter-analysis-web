@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Who's best? | About</title>
+    <% include partials/head %>
+    <link rel="stylesheet" href="../css/styles.min.css" />
+</head>
+<body>
+    <% include partials/navbar %>
+    <div class="container text-justify">
+        <h2>About</h2>
+        <p>This project aims to use data from Twitter to get to know <span>the popularity of the most important database engines</span>,
+            according the March 2019 version of the <a href="https://db-engines.com/en/ranking">DB-Engines Ranking</a>. These engines are:
+            <ul class="databases">
+                <li>Oracle Database</li>
+                <li>MySQL</li>
+                <li>SQLServer</li>
+                <li>PostgreSQL</li>
+                <li>MongoDB</li>
+                <li>IBM DB2</li>
+                <li>Microsoft Access</li>
+                <li>Redis</li>
+                <li>Elasticsearch</li>
+                <li>SQLite</li>
+            </ul>
+        </p>
+        <p>The main interest is to be able to locate each tweet in a map, according to the tweet's or the user's location 
+            and to the topic (database engine) they refer to.</p>
+        <p>For this purpose, <span>Kafka</span> and <span>Spark Streaming</span> are used to process, transform and store data 
+            in <span>Elasticsearch</span> and <span>MongoDB</span> databases.
+            Besides, <span>Leaflet.js</span> is the framework the map is developed with.</p>
+        <p>All the app is deployed with <span>Node.js</span>, alongside with the API where registered users can make their own requests to get the stored data.
+            You can know more about the API <a href="api.html">here</a>.</p>
+        <p>You can find all the code of the project and the instructions to run it on your own on this 
+            <a href="https://github.com/francisgalvez/twitter-analysis">GitHub repo</a>. Feel free to customize the Twitter topics or hashtags
+            you want to filter the tweets by.</p>
+    </div>
+    <% include partials/footer %>
+    <script>
+        $(function() {
+            $('#about').addClass('active');
+        });
+    </script>
+</body>
+</html>

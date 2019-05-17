@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Who's best? | Login/Sign up</title>
+  <% include partials/head %>
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+  <% include partials/navbar %>
+  <div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1" id="signIn">
+            <h3>Already have an account?</h3>
+            <h3>Sign in and continue getting tweets!</h3>
+            <form action="/auth/login" class="needs-validation" method="post" novalidate>
+                <div class="form-group">
+                    <input id="siEmail" name="email" type="text" class="form-control" placeholder="Email *" value="" required>
+                    <div class="invalid-feedback">
+                      Email cannot be empty.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input id="siPassword" name="password" type="password" class="form-control" placeholder="Password *" value="" required>
+                    <div class="invalid-feedback">
+                      Password cannot be empty.
+                    </div>
+                </div>
+                <% if (message.length > 0) { %>
+                  <div class="alert alert-danger">
+                    <%= message %>
+                  </div>
+                <% } %>
+                <div class="form-group text-right">
+                    <input type="submit" class="btnSubmit" value="Login" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 login-form-2" id="signUp">
+            <h3>Sign up to start enjoying our API!</h3>
+            <form>
+                <div class="form-group">
+                  <input id="email" type="text" class="form-control" placeholder="Enter an email *" value="" required>
+                  <div id="invalid-email" class="invalid-feedback">
+                    You must enter a valid email with less than 50 characters.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input id="password" type="password" class="form-control" placeholder="Choose a password *" value="" required>
+                  <div id="invalid-password" class="invalid-feedback">
+                    Your password must have at least 5 characters and a maximum of 50.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input id="password2" type="password" class="form-control" placeholder="Repeat password *" value="" required>
+                  <div id="invalid-password2" class="invalid-feedback">
+                    Passwords are not equal.
+                  </div>
+                </div>
+                <div class="form-group text-right">
+                  <input type="submit" class="btnSubmit" value="Sign up" />
+                </div>
+                <div id="confirm">
+                  <p>Your register has been performed correctly.</p>
+                  <p>You can log in now!</p>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <% include partials/footer %>
+  <script>
+      $(function() {
+          $('#auth').addClass('active');
+      });
+  </script>
+  <script>
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+  <script>
+    $(function(){
+      $('#signUp').on('submit', function(e){
+        if($("#email").val().indexOf('@') <= 0){
+          $("#invalid-email").css("display", "block");
+          return false;
+        } else if($("#password").val().length < 5){
+          $("#invalid-email").css("display", "none");
+          $("#invalid-password").css("display", "block");
+          return false;
+        } else if($("#password").val() != $("#password2").val()){
+          $("#invalid-password2").css("display", "block");
+          return false;
+        } else {
+          $("#invalid-email").css("display", "none");
+          $("#invalid-password").css("display", "none");
+          $("#invalid-password2").css("display", "none");
+          var datos = JSON.stringify({ "email": $("#email").val(), "password": $("#password").val() });
+          e.preventDefault();
+          $.ajax({
+            url: '/auth/signup',
+            type: 'POST',
+            data: datos,
+            processData: false,
+            contentType: 'application/json',
+            success: function(data){
+              $('#confirm').css("display","block");
+              $('#signUp').each(function(){
+                this.reset();
+              });
+            },
+            error: function(jqXHR, textStatus) {
+              console.log("Request failed: " + textStatus);
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
