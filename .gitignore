@@ -82,4 +82,3 @@ databases.json
 spark-warehouse
 __pycache__
 temp
-**/config.js
