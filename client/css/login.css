@@ -97,14 +97,16 @@ span{
 .form-group{
   padding-bottom: 10px;
 }
-#confirm{
+#confirm, #error{
   display: none;
-  background: green;
   color: white;
   padding: 3% 5% 3% 5%;
   border-radius: 0.5rem;
 }
-#confirm p{
+#confirm p, #error p, .alert p, .alert-danger p{
   margin: 0;
   padding: 0;
+}
+#confirm{
+  background: green;
 }

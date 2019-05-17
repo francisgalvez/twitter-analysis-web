@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-6 login-form-2" id="signUp">
             <h3>Sign up to start enjoying our API!</h3>
-            <form>
+            <form id="signUpForm">
                 <div class="form-group">
                   <input id="email" type="text" class="form-control" placeholder="Enter an email *" value="" required>
                   <div id="invalid-email" class="invalid-feedback">
@@ -62,6 +62,10 @@
                 <div id="confirm">
                   <p>Your register has been performed correctly.</p>
                   <p>You can log in now!</p>
+                </div>
+                <div style="display:none" id="error" class="alert alert-danger">
+                  <p> We're sorry! That email is already registered.</p>
+                  <p>Please, choose another one.</p>
                 </div>
             </form>
         </div>
@@ -95,6 +99,9 @@
   <script>
     $(function(){
       $('#signUp').on('submit', function(e){
+        $('#confirm').css("display","none");
+        $('#error').css("display","none");
+        
         if($("#email").val().indexOf('@') <= 0){
           $("#invalid-email").css("display", "block");
           return false;
@@ -109,6 +116,8 @@
           $("#invalid-email").css("display", "none");
           $("#invalid-password").css("display", "none");
           $("#invalid-password2").css("display", "none");
+          $('#confirm').css("display","none");
+          $('#error').css("display","none");
           var datos = JSON.stringify({ "email": $("#email").val(), "password": $("#password").val() });
           e.preventDefault();
           $.ajax({
@@ -118,13 +127,14 @@
             processData: false,
             contentType: 'application/json',
             success: function(data){
+              $('#error').css("display","none");
               $('#confirm').css("display","block");
-              $('#signUp').each(function(){
-                this.reset();
-              });
+              $('#signUpForm').trigger("reset");
             },
             error: function(jqXHR, textStatus) {
-              console.log("Request failed: " + textStatus);
+              $('#confirm').css("display","none");
+              $('#error').css("display","block");
+              $('#signUpForm').trigger("reset");
             }
           });
         }

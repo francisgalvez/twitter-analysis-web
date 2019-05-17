@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+var config = require('../config');
+
+mongoose.connect('mongodb://' + config.MONGO_USER + ':' + config.MONGO_PASSWORD + '@' + '192.168.67.13:27021/users', { useNewUrlParser: true });
 
 const userSchema = mongoose.Schema({
     email: {
@@ -46,4 +49,4 @@ userSchema.methods.validatePassword = function(password){
     return bcrypt.compareSync(password, user.password);
 };
 
-//module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);
