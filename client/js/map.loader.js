@@ -1,3 +1,5 @@
+import { token } from './secret.js'
+
 var parentGroup = L.markerClusterGroup(),
     oracle = L.featureGroup.subGroup(parentGroup),
     mysql = L.featureGroup.subGroup(parentGroup),
@@ -73,6 +75,7 @@ getDataAddMarkers = function ({label, value, map, exclamation}){
 
     tweets = $.ajax({
         url: "http://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/true/since/" + hours,
+        headers: { 'Authorization': 'Bearer ${token}'},
         dataType: "json",
         error: function(xhr) {
             console.log(xhr.statusText);

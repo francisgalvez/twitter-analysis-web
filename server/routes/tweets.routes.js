@@ -27,6 +27,10 @@ var dbs = databases.find().lean().exec(function (err, docs) {
 
 // Get ALL tweets
 router.get('/all', middleware.ensureAuthenticated, async (req, res) => {
+    if(req.user.role != 'admin'){
+        return res.sendStatus(403);
+    }
+    
     var response = await Tweets["mainDbES"].search({
                                                     index: 'twitter',
                                                     type: 'tweet',
@@ -211,7 +215,7 @@ router.get('/topics/:topiclist/condition/:operator/geolocation/:option?', middle
 });
 
 // Get located or not located tweets since X hours
-router.get('/geolocation/:option/since/:hours', async (req, res) => {
+router.get('/geolocation/:option/since/:hours', middleware.ensureAuthenticated, async (req, res) => {
     var tweets;
     var option = (req.params.option == 'true');
     
@@ -221,7 +225,7 @@ router.get('/geolocation/:option/since/:hours', async (req, res) => {
 });
 
 // Get tweets with options since X hours
-router.get('/topics/:topiclist/condition/:operator/geolocation/:option/since/:hours', async (req, res) => {
+router.get('/topics/:topiclist/condition/:operator/geolocation/:option/since/:hours', middleware.ensureAuthenticated, async (req, res) => {
     var tweets;
     var hours = req.params.hours;
     var option = (req.params.option == 'true');
@@ -254,6 +258,10 @@ router.get('/databases', middleware.ensureAuthenticated, async (req, res) => {
 
 // Endpoint interno para borrar tweets más antiguos de la franja horaria correspondiente
 router.post('/delete/db/:db', middleware.ensureAuthenticated, async (req, res) => {
+    if(req.user.role != 'admin'){
+        return res.sendStatus(403);
+    }
+
     var dbName = req.params.db;
     
     var names = await databases.findOne({name: dbName}).lean();
