@@ -6,7 +6,6 @@ var parentGroup = L.markerClusterGroup(),
     mongo = L.featureGroup.subGroup(parentGroup),
     ibm = L.featureGroup.subGroup(parentGroup),
     access = L.featureGroup.subGroup(parentGroup),
-    redis = L.featureGroup.subGroup(parentGroup),
     elasticsearch = L.featureGroup.subGroup(parentGroup),
     sqlite = L.featureGroup.subGroup(parentGroup);
 
@@ -19,13 +18,12 @@ var enginesOverlay = {
     '<i style="background: #72AF26"></i>MongoDB': mongo,
     '<i style="background: #303030"></i>IBM db2': ibm,
     '<i style="background: #A03336"></i>Microsoft Access': access,
-    '<i style="background: #D63E2A"></i>Redis': redis,
     '<i style="background: orange"></i>Elasticsearch': elasticsearch,
     '<i style="background: #38AADD"></i>SQLite': sqlite
 };
 
 var map = L.map('map', {
-    maxZoom: 16, layers: [oracle, mysql, sqlserver, postgres, mongo, ibm, access, redis, elasticsearch, sqlite]
+    maxZoom: 16, layers: [oracle, mysql, sqlserver, postgres, mongo, ibm, access, elasticsearch, sqlite]
 }).setView([20.0,0.0], 2);
 
 // Types of basemaps
@@ -107,9 +105,6 @@ getDataAddMarkers = function ({label, value, map, exclamation}){
                 } else if(jQuery.inArray("Access", feature.properties.topics) !== -1){
                     layer.setIcon(L.AwesomeMarkers.icon({icon: 'null', markerColor: 'darkred'}));
                     layer.addTo(access);
-                } else if(jQuery.inArray("Redis", feature.properties.topics) !== -1){
-                    layer.setIcon(L.AwesomeMarkers.icon({icon: 'null', markerColor: 'red'}));
-                    layer.addTo(redis);
                 } else if(jQuery.inArray("Elasticsearch", feature.properties.topics) !== -1){
                     layer.setIcon(L.AwesomeMarkers.icon({icon: 'null', markerColor: 'orange'}));
                     layer.addTo(elasticsearch);

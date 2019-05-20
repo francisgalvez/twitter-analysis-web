@@ -32,7 +32,6 @@ const userSchema = mongoose.Schema({
 userSchema.pre("save", function (next) {
     var user = this;
 
-    //check if password is modified, else no need to do anything
     if (!user.isModified('password')) {
        return next();
     }

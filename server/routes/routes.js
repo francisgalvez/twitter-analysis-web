@@ -26,7 +26,6 @@ module.exports = (app, passport) => {
     }));
 
     app.post('/dashboard/changePassword', function(req, res, next){
-        console.log(req.body.password);
         var user = req.user;
 
         user.password = req.body.password;
