@@ -61,7 +61,7 @@ code {
     padding: 3px;
     font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
 }
-pre code {
+pre>code {
     border-radius: 0px; 
     -moz-border-radius: 0px; 
     -webkit-border-radius: 0px; 
