@@ -27,8 +27,8 @@ var map = L.map('map', {
 }).setView([20.0,0.0], 2);
 
 // Types of basemaps
-var lightMap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> & &copy; <a href="https://carto.com/attributions">CARTO</a>',
+var lightMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> & &copy; <a href="https://carto.com/attributions">CARTO</a>',
     maxZoom: 16,
     minZoom: 2.5,
     continuousWorld: false,
@@ -36,8 +36,8 @@ var lightMap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{
 
 var nightMode = false;
 
-var nightmodeMap = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> & &copy; <a href="https://carto.com/attributions">CARTO</a>',
+var nightmodeMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> & &copy; <a href="https://carto.com/attributions">CARTO</a>',
     maxZoom: 16,
     minZoom: 2.5,
     continuousWorld: false,
@@ -70,7 +70,7 @@ getDataAddMarkers = function ({label, value, map, exclamation}){
     }
 
     tweets = $.ajax({
-        url: "http://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/true/since/" + hours,
+        url: "https://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/true/since/" + hours,
         headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NTgxMDc5ODF9.SmHFgrDjrHMY0ZzDT_nR5ZT2HflvdONc77BGcKb4hHY'},
         dataType: "json",
         error: function(xhr) {

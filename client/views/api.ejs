@@ -23,7 +23,7 @@
                 <div class="col-sm-12">
                     <h4>First step: Register and get your API Key</h4><hr>
                     <div class="content">
-                        <p>Our API is protected, so you will have to do your requests using an API token provided after your registration in our page. You can egister <a href="/auth">here</a>.</p>
+                        <p>Our API is protected, so you will have to do your requests using an API token provided after your registration in our page. You can register <a href="/auth">here</a>.</p>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <h4>API main URL</h4><hr>
                     <div class="content">
                         <p>The base of the URL you have to use to make your requests is the following one</p>
-                        <pre><code>http://whosbest-twitter-map.app.di.ual.es/api/tweets</code></pre>
+                        <pre><code>https://whosbest-twitter-map.app.di.ual.es/api/tweets</code></pre>
                     </div>
                 </div>
             </div>
@@ -44,6 +44,7 @@
                         <p>After registering, you should log in order to know the API token you have been assigned. Once you have it, you have to include it in the <span>Headers</span>
                         section of the request, specifically as the value of <span>Authorization</span> key. The pattern this value field has to follow is <span>'Bearer <span style="font-style: italic">token</span>'.</span>
                         </p>
+                        <p>We suggest you use Postman to perform requests easier. Check it <a href="https://www.getpostman.com/">here</a></p>
                         <p>Now you have full access to our API!</p>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                     <div class="content">
                         <p>You might want to just get certain tweets regarding the existance of their location.
                             You can do it with the following request:</p>
-                        <pre><code>http://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/<code style="color: #e83e8c;">option</code></code></pre>
+                        <pre><code>https://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/<code style="color: #e83e8c;">option</code></code></pre>
                         <p>The "option" field takes a boolean value, where:</p>
                         <ul class="operators">
                             <li><code>true</code> returns all <span>located</span> tweets.</li>
@@ -68,7 +69,7 @@
                     <h4>Get filtered tweets</h4><hr>
                     <div class="content">
                         <p>In this request you have multiple filters to apply to the returned tweets.</p>
-                        <pre><code>http://whosbest-twitter-map.app.di.ual.es/api/tweets/topics/<code style="color: #e83e8c;">topiclist</code>/condition/<code style="color: #e83e8c;">operator</code>/geolocation/<code style="color: #e83e8c;">option</code></code></pre>
+                        <pre><code>https://whosbest-twitter-map.app.di.ual.es/api/tweets/topics/<code style="color: #e83e8c;">topiclist</code>/condition/<code style="color: #e83e8c;">operator</code>/geolocation/<code style="color: #e83e8c;">option</code></code></pre>
                         <p>Apart from the geolocation parameter, which we explained in the previous section, you can add a list 
                             of topics according to the database engines you want to know about. In this sense, there are two possible
                             operators:</p>
@@ -103,7 +104,7 @@
                     <h4>Get located/not located tweets since certain hours</h4><hr>
                     <div class="content">
                         <p>In these request you will be able to get the tweets regarding their antiqueness.</p>
-                        <pre><code>http://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/<code style="color: #e83e8c;">option</code>/since/<code style="color: #e83e8c;">hours</code></code></pre>
+                        <pre><code>https://whosbest-twitter-map.app.di.ual.es/api/tweets/geolocation/<code style="color: #e83e8c;">option</code>/since/<code style="color: #e83e8c;">hours</code></code></pre>
                         <p>The <code>hours</code> parameter can take the following values:</p>
                         <ul class="hours">
                             <li>2hours</li>
@@ -119,7 +120,7 @@
                     <div class="content">
                         <p>This call to the API is similar to the <a href="#filtered">"Get filtered tweets" request</a>, but with
                             the hours parameter added, just like we saw in the previous section.</p>
-                        <pre><code>http://whosbest-twitter-map.app.di.ual.es/api/tweets/topics/<code style="color: #e83e8c;">topiclist</code>/condition/<code style="color: #e83e8c;">operator</code>/geolocation/<code style="color: #e83e8c;">option</code>/since/<code style="color: #e83e8c;">hours</code></code></pre>
+                        <pre><code>https://whosbest-twitter-map.app.di.ual.es/api/tweets/topics/<code style="color: #e83e8c;">topiclist</code>/condition/<code style="color: #e83e8c;">operator</code>/geolocation/<code style="color: #e83e8c;">option</code>/since/<code style="color: #e83e8c;">hours</code></code></pre>
                     </div>
                 </div>
             </div>
@@ -129,7 +130,7 @@
                     <div class="content">
                         <p>By default, the number of documents retrieved per request is 10. But don't worry! You can extend that number up to 10.000 just by adding
                             the size parameter to the base URL. Here's an example, which would return 100 results:</p>
-                        <pre><code>http://whosbest-twitter-map.app.di.ual.es/api/tweets/all?size=100</code></pre>
+                        <pre><code>https://whosbest-twitter-map.app.di.ual.es/api/tweets/all?size=100</code></pre>
                     </div>
                 </div>
             </div>
